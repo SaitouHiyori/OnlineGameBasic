@@ -17,14 +17,85 @@
 
 <body>
 
-<header>FryFrying</header>
+<header>
+	FryFrying<br>
+	<img src = "img/FlyFlying.png">
+</header>
 
 <div><nav>
 	<h2>作品概要</h2>
 	<p>
-		本文本文本文<br>
-		本文本文本文
+		<ul>
+			<li>ジャンル　　　　：プチッとアクション</li>
+			<li>プラットフォーム：ＰＣ</li>
+		</ul>		
+		ハエは決意した。人間に反逆することを…！<br>
+		自らを潰した人間どもを潰し返すのだ。
 	</p>
+
+	<h2>ゲーム制作</h2>
+	<p>
+		<ul>
+			<li>開発環境：Ｕｎｉｔｙ</li>
+			<li>開発期間：３週間程度（週休２日／１日４．５時間前後）</li>
+			<li>開発人数：４人</li>
+			<li>担当個所：メインプログラマー（プロジェクト運営・プログラム管理）</li>
+		</ul>
+		１年次の夏休み終了後に制作。初めてのチーム制作だった。<br>
+		制作の目的は「入学から半年間で学んできたことを形にする」こと。<br>
+		Ｕｎｉｔｙを使った当たり判定や、transform.positionを変更することによる移動などを使用できるアクションゲームを選択し、企画／制作を行った。<br>
+		最も苦労したのはエネミーのＡＩ。<br>
+		近づく／攻撃する／逃げるなど、複数の行動パターンの切り替えを行うのが当時は苦労した。<br>
+		距離を測って一定時間経過で行動パターンの変更を行った。
+	</p>
+
+	<p>
+	▼エネミーの行動スクリプト<br>
+	<pre><code>
+	void Update (){
+
+	    Vector3 Direction = Fly.transform.position - transform.position; //Flyの方向を取得
+	    float Distance = Direction.sqrMagnitude;//自身と対象との距離
+	    Direction = Direction.normalized; //距離要素を取り除く
+	    Direction.y = 0.0f;
+	    if (ShotFlag == false){
+	        //LimitDistanceより近いので逃げる
+	        if (Distance &lt;= LimitDistance){
+	            transform.position -= Direction * Speed * Time.deltaTime;
+	        }
+
+	        //LimitDistanceより２倍遠いので近づく
+	        else if (Distance &gt; LimitDistance * 2){
+	            transform.position += Direction * Speed * Time.deltaTime;
+	        }
+	        Quaternion targetRotation = Quaternion.LookRotation(Fly.transform.position - transform.position);
+	        targetRotation.x = 0.0f;
+	        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+	    }
+	    //LimitDistanceの２倍より近ければ弾を発射
+	    if (Distance &lt;= LimitDistance * 2 &amp;&amp; Distance &gt; LimitDistance){
+	        ShotFlag = true;
+	        if (BulletCount &gt; 0){
+	            if (ShotInterval &gt; ShotIntervalMax){
+	                GameObject ShotBullet = (GameObject)Instantiate(Bullet, transform.position+transform.forward+Vector3.up, transform.rotation);
+	                BulletShot.Play();
+	                BulletCount--;
+	                ShotInterval = 0;
+	            }
+	        }
+	    }
+	    if (BulletCount &lt;= 0){
+	        ShotFlag = false;
+	        if(Reload &gt; ReloadMax){
+	            BulletCount = BulletLimite;
+	            Reload = 0;
+	        }
+	        Reload += Time.deltaTime;
+	    }
+	    ShotInterval += Time.deltaTime;
+	}
+	</code></pre></p>
+
 </nav></div>
 
 </body>

@@ -24,8 +24,8 @@ h2{
 }
 
 header{
-	color : #ff4500;
-	font-size  : x-large;
+	color      : #ff4500;
+	font-size  : 50px;
 	text-align : center;
 }
 
@@ -47,5 +47,15 @@ li a:hover{
 	display    : block;
 }
 
+pre{
+	color            : #000;
+	background-color : #EEE;
+	border-radius    : 50px
+}
+
+img{
+	width  : 1000px;
+	height :  500px;
+}
 
 end

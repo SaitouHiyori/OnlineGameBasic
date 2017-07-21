@@ -6,25 +6,55 @@
 
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="ぴよりん制作のゲーム紹介サイト">
-<meta name="keywords" content="ぴよりん,ゲーム,Ｕｎｉｔｙ,ゲーム制作,","ハエ">
+<meta name="keywords" content="ぴよりん,ゲーム,Ｕｎｉｔｙ,ゲーム制作,","色","エンドレスラン">
 
 <link rel="stylesheet" href="css/style.css">
 
 
-<title>Piyoin's Factory-FryFrying</title>
+<title>Piyoin's Factory-ColorRunner</title>
 
 </head>
 
 <body>
 
-<header>FryFrying</header>
+<header>
+	Color Runner<br>
+	<img src = "img/ColorRunner.png">
+</header>
 
 <div><nav>
 	<h2>作品概要</h2>
 	<p>
-		本文本文本文<br>
-		本文本文本文
+		<ul>
+			<li>ジャンル　　　　：横スクロールアクション</li>
+			<li>プラットフォーム：スマートフォン</li>
+		</ul>
+		目まぐるしく色が変わる世界。<br>
+		色に支配された世界を駆けろっ！<br>
+		色の変化で通れた道が通れなくなり、通れなかった道は通れるようになる。<br>
+		最適なルートを判断し、世界の最果てへと到達するのだ。
 	</p>
+
+	<h2>ゲーム制作</h2>
+	<p>
+		<ul>
+			<li>開発環境：Ｕｎｉｔｙ</li>
+			<li>開発期間：１０日前後（１日３～５時間）</li>
+			<li>開発人数：１人</li>
+		</ul>
+		１年次の冬季長期休暇中に制作。<br>
+		今回の目的は「スマートフォン向けゲームの制作」。<br>
+		それまで作ってこなかったジャンルであったため、挑戦したいと思った。<br>
+		苦労したのは座標変換。スクリーン座標とワールド座標の転換を知らなかったが故、<br>
+		どのようにワールド座標を指定するかを考えた。<br>
+		上・中・下の３レーンある道を移動するのにタップした位置を取得しようかと考えた。<br>
+		しかし、狭いスマートフォンの画面ではプレイヤーの認識と実際のタップ位置のずれが発生すると<br>
+		考えられたためそれぞれの道の左端にボタンをつけることで実現した。<br>
+		また、タップ位置にエネミーがいるかの判断にも苦労した。<br>
+		タップで攻撃ができるのだが、その判定をどう取ればいいのかわからずに苦労した。<br>
+		最終的には数フレームの間だけエネミーを倒すオブジェクトをタップ位置に生成することで擬似的に表現した。
+	</p>
+
 </nav></div>
 
 </body>

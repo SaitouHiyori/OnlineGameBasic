@@ -6,25 +6,111 @@
 
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="ぴよりん制作のゲーム紹介サイト">
-<meta name="keywords" content="ぴよりん,ゲーム,Ｕｎｉｔｙ,ゲーム制作,","ハエ">
+<meta name="keywords" content="ぴよりん,ゲーム,Ｕｎｉｔｙ,ゲーム制作,","探索","ゾンビ">
 
 <link rel="stylesheet" href="css/style.css">
 
 
-<title>Piyoin's Factory-FryFrying</title>
+<title>Piyoin's Factory-だんじょんくえすと！</title>
 
 </head>
 
 <body>
 
-<header>FryFrying</header>
+<header>
+	だんじょんくえすと！<br>
+	<img src = "img/DungeonQuest.png">
+</header>
 
 <div><nav>
 	<h2>作品概要</h2>
 	<p>
-		本文本文本文<br>
-		本文本文本文
+		<ul>
+			<li>ジャンル　　　　：ダンジョン探索型アクション</li>
+			<li>プラットフォーム：ＰＣ</li>
+		</ul>		
+		トレジャーハンターとなってダンジョン最奥のお宝を入手せよ。<br>
+		途中にはゾンビが立ちはだかる。打ち倒すのか？はたまた逃げるのか…<br>
+		その判断はプレイヤーに任されている。
 	</p>
+
+	<h2>ゲーム制作</h2>
+	<p>
+		<ul>
+			<li>開発環境：Ｕｎｉｔｙ</li>
+			<li>開発期間：２週間（週休２日／１日５時間前後）</li>
+			<li>開発人数：２人</li>
+			<li>担当個所：メインプログラマー（ほぼ全て作成）</li>
+		</ul>
+		このゲームは「自分の技術力をアピールする」という目的で作成した。<br>
+		その中で、挑戦的な目標を設定し、それをクリアすることで技術力をアピールできるのではと考えた。<br>
+		今回の挑戦は「複数の行動を１つのキーで実行できるようにすること」。<br>
+		これをクラスの継承を利用してクリアした。<br>
+		元となったクラスを変数化し、それに継承したクラスのメソッドを代入することで行動の切り替えを行った。
+	</p>
+
+	<p>▼複数の行動を切り替えるメソッド</p>
+
+	<pre><code>
+	public void Activate(){
+
+	    //GimickKindで処理分岐
+	        switch (GimickKind){
+	        //宝箱
+	        case GimickGenre.TreasureChest:
+	        case GimickGenre.WeaponsChest:
+	            //開いてなければ開ける
+	            if (!OpenFlag){
+	                StartCoroutine(ChestOpen());
+	            }
+	            //アイテムを取得する
+	            else{
+	                Player.GetItem = Item;
+	            }
+	            break;
+	        //ドア
+	        case GimickGenre.Door:
+	            DoorMove();
+	            break;
+	        //鍵付きドア
+	        case GimickGenre.LockDoor:
+	            //鍵が集まっていれば開閉
+	       	    if (GameManager.KeyCount &gt;= Gimick.LockDoor.LockCount){
+	                DoorMove();
+	            }
+	            //集まってなければその旨を伝える表示をする
+	            else{
+	                if (InfoFlag){
+	                    return;
+	                }
+	                StartCoroutine(DoorIsLock());
+	            }
+	            break;
+	    }
+	}
+	</code></pre>
+
+	<p>▼プレイヤーの行動を切り替えるメソッド</p>
+
+	<pre><code>
+	private void Action(){
+	    //優先順：攻撃・ギミック作動・アイテム取得・アイテム使用
+	    if (IsAttack){
+	        Attack();
+	        return;
+	    }
+	    else if (IsGimick){
+	        GimickActivate();
+	        if (IsGetItem()){
+	            ItemGet();
+	        }
+	    }
+	    else {
+	        UseItem();
+	    }
+	}
+	</code></pre>
+
 </nav></div>
 
 </body>
