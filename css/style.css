@@ -13,6 +13,12 @@ body{
 		/*文字サイズ/行間、フォントファミリー*/"
 }
 
+#coment{
+	color            : #000;
+	background-color : #EEE;
+	border-radius   : 30px;
+}
+
 h2{
 	color            : #000;
 	text-align       : center;
@@ -29,6 +35,10 @@ header{
 	text-align : center;
 }
 
+footer{
+	text-align : center;
+}
+
 ul{
 	background-color : #FFF;
 	background       : linear-gradient(#FFF, #EEE);
@@ -41,9 +51,17 @@ li{
 	display    : block;
 }
 
-li a:hover{
-	color      : #000;
-	background : liner-gradiet(#EEE,#FFF);
+a{
+	color : #000;
+}
+
+a:hover{
+	color      : #A00;
+}
+
+#list:hover{
+	color      : #FFF;
+	background : linear-gradient(#f08080,#fa0872);
 	display    : block;
 }
 
